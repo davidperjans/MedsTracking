@@ -13,12 +13,8 @@ namespace Infrastructure.Identity.Mapping
         public MappingProfile()
         {
             CreateMap<ApplicationUser, User>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-
-            CreateMap<User, ApplicationUser>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
-                .ForMember(dest => dest.NormalizedUserName, opt => opt.MapFrom(src => src.Email.ToUpper()))
-                .ForMember(dest => dest.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()));
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ReverseMap();
         }
     }
 }
